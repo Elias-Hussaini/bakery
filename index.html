@@ -295,7 +295,7 @@
             <div class="tab" data-tab="daily-wages">حقوق روزانه</div>
             <div class="tab" data-tab="reports">گزارشات ماهانه</div>
             <div class="tab" data-tab="daily-reports">گزارش روزانه</div>
-            <div class="tab" data-tab="flour-control">کاهش موجودی آرد</div>
+            <div class="tab" data-tab="weekly-wages">گزارش حقوق هفتگی</div>
         </div>
         </div>
         <div id="daily-reports" class="tab-content">
@@ -805,6 +805,59 @@
             </table>
         </div>
     </div>
+    <div id="weekly-wages" class="tab-content">
+        <h2>گزارش حقوق هفتگی کارگران</h2>
+        
+        <div class="form-group">
+            <label for="weekly-worker">کارگر:</label>
+            <select id="weekly-worker">
+                <option value="">انتخاب کارگر</option>
+                <!-- لیست کارگران اینجا لود میشود -->
+            </select>
+        </div>
+        
+        <div class="date-picker">
+            <label>از تاریخ:</label>
+            <input type="date" id="weekly-start-date">
+        </div>
+        
+        <div class="date-picker">
+            <label>تا تاریخ:</label>
+            <input type="date" id="weekly-end-date">
+        </div>
+        
+        <button id="generate-weekly-report">محاسبه حقوق</button>
+        
+        <div class="summary-card" id="weekly-summary">
+            <h3>خلاصه گزارش</h3>
+            <div class="summary-item">
+                <span>تعداد روزهای کار:</span>
+                <span id="weekly-work-days">0</span>
+            </div>
+            <div class="summary-item">
+                <span>حقوق روزانه:</span>
+                <span id="weekly-daily-wage">0 تومان</span>
+            </div>
+            <div class="summary-item total">
+                <span>حقوق کل:</span>
+                <span id="weekly-total-wage">0 تومان</span>
+            </div>
+        </div>
+        
+        <h3>جزئیات روزهای کار</h3>
+        <table id="weekly-details-table">
+            <thead>
+                <tr>
+                    <th>تاریخ</th>
+                    <th>نوع نان</th>
+                    <th>تعداد نان</th>
+                    <th>آرد مصرفی</th>
+                    <th>حقوق روز</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
     <script>
     // Data storage
     let flourData = JSON.parse(localStorage.getItem('flourData')) || [];
@@ -830,6 +883,7 @@
         option.textContent = worker.name;
         wageWorkerSelect.appendChild(option);
     });
+    
     
     // Tab switching
     tabs.forEach(tab => {
@@ -1374,7 +1428,115 @@
         const date = new Date(dateString);
         return date.toLocaleDateString('fa-IR');
     }
+    // Weekly Wages Report
+document.getElementById('generate-weekly-report').addEventListener('click', generateWeeklyReport);
+
+function generateWeeklyReport() {
+    const workerId = parseInt(document.getElementById('weekly-worker').value);
+    const startDate = document.getElementById('weekly-start-date').value;
+    const endDate = document.getElementById('weekly-end-date').value;
     
+    if (!workerId || !startDate || !endDate) {
+        alert('لطفاً کارگر و بازه زمانی را انتخاب کنید');
+        return;
+    }
+    
+    if (new Date(startDate) > new Date(endDate)) {
+        alert('تاریخ شروع باید قبل از تاریخ پایان باشد');
+        return;
+    }
+    
+    const worker = workers.find(w => w.id === workerId);
+    if (!worker) {
+        alert('کارگر انتخاب شده معتبر نیست');
+        return;
+    }
+    
+    // Get baking records for this worker in date range
+    const workerBaking = bakingRecords.filter(record => 
+        record.workerId === workerId && 
+        record.date >= startDate && 
+        record.date <= endDate
+    );
+    
+    // Get unique work days
+    const workDays = [...new Set(workerBaking.map(record => record.date))];
+    
+    // Calculate total wage
+    const totalWage = workDays.length * worker.salary;
+    
+    // Update summary
+    document.getElementById('weekly-work-days').textContent = workDays.length;
+    document.getElementById('weekly-daily-wage').textContent = worker.salary.toLocaleString() + ' تومان';
+    document.getElementById('weekly-total-wage').textContent = totalWage.toLocaleString() + ' تومان';
+    
+    // Update details table
+    const tbody = document.getElementById('weekly-details-table').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    workDays.forEach(date => {
+        const dayRecords = workerBaking.filter(record => record.date === date);
+        const dayBreadCount = dayRecords.reduce((sum, record) => sum + record.breadCount, 0);
+        const dayFlourUsed = dayRecords.reduce((sum, record) => sum + (record.flourUsedBags || 0), 0);
+        const breadTypes = [...new Set(dayRecords.map(record => 
+            record.breadType === 'normal' ? 'معمولی' : 'ویژه'
+        )).join('، ')];
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${formatDate(date)}</td>
+            <td>${breadTypes}</td>
+            <td>${dayBreadCount}</td>
+            <td>${dayFlourUsed.toFixed(1)} کیسه</td>
+            <td>${worker.salary.toLocaleString()} تومان</td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    // Also include wage payments in the report
+    const wagePayments = dailyWages.filter(wage => 
+        wage.workerId === workerId && 
+        wage.date >= startDate && 
+        wage.date <= endDate
+    );
+    
+    if (wagePayments.length > 0) {
+        const paymentsRow = document.createElement('tr');
+        paymentsRow.innerHTML = `
+            <td colspan="4" style="text-align: center; font-weight: bold;">پرداخت‌های ثبت شده</td>
+            <td></td>
+        `;
+        tbody.appendChild(paymentsRow);
+        
+        wagePayments.forEach(payment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${formatDate(payment.date)}</td>
+                <td colspan="2">پرداخت حقوق</td>
+                <td></td>
+                <td>${payment.amount.toLocaleString()} تومان</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+}
+
+// در تابع updateWorkersUI، dropdown کارگران را برای این بخش هم آپدیت کنید:
+function updateWorkersUI() {
+    // ... کدهای قبلی
+    
+    // Update worker dropdown in weekly report section
+    const weeklyWorkerSelect = document.getElementById('weekly-worker');
+    if (weeklyWorkerSelect) {
+        weeklyWorkerSelect.innerHTML = '<option value="">انتخاب کارگر</option>';
+        workers.forEach(worker => {
+            const option = document.createElement('option');
+            option.value = worker.id;
+            option.textContent = worker.name;
+            weeklyWorkerSelect.appendChild(option);
+        });
+    }
+}
     function showAlert(message, type) {
         const alert = document.createElement('div');
         alert.className = `alert alert-${type}`;
@@ -1387,6 +1549,7 @@
             alert.remove();
         }, 3000);
     }
+    
    </script>
 </body>
 </html>
