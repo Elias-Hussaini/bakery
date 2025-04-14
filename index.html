@@ -9,7 +9,6 @@
     <link rel="apple-touch-icon" href="1.jpg">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoThZERRy1CkWoEGqFVh1MbvqhNGlIUlwcBdeCgx+LVQcXZ10dXAVB8AfE0clJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPOKBqlpFOxMVcflUMvCKIEYQxICJTT2YWM/AcX/fw8fUuyrO8z/05BpWCyQCfSDzHdMMi3iCe2bR0zvvEYVaWFOJz4nGDLkj8yHXZ5TfOJYcFnhk2Mul54jCxWOrhK1hVnyRSSrqullTStCDnE6K6kK8Th1w8q8E9msw0q8mOGo8ROIVpY5SMCAuK0kGKRxKVVkM0iY6qQv6PEPO/4FeTWklPGzgxXKAMEusO2/EB/8tWqVZ8mYwOQpebLt9BodA7DaLX+1hYw/MLAK1F6PexwBwu8C1bXG9j+4A5n6Xvd5bZTB+J+Du2+rgB1t8DFKUDQO+QbzPqshQYDoF7M9q97HXQcEfkrfKd4P6GWSsuz3kD8CYoUvY8B7wcAuNF1P3nKd/d2gDZ9fhJzVKx1Y5+AAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cKEQ4WIBJ5Qk8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAASElEQVQ4y2NgGAWjYBSMglEwCkbBKBgFowA7+A9F/0E0I4oYI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcIwYAAJ4cKzWQJ1kAAAAASUVORK5CYII=">
-
     <style>
         :root {
             --primary-color: #8e44ad;
@@ -154,17 +153,7 @@
             padding-bottom: 10px;
             border-bottom: 1px dashed #ddd;
         }
-        .btn-warning {
-    background-color: #f39c12;
-    color: white;
-}
-
-.flour-action-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
+        
         .summary-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
@@ -306,7 +295,7 @@
             <div class="tab" data-tab="daily-wages">حقوق روزانه</div>
             <div class="tab" data-tab="reports">گزارشات ماهانه</div>
             <div class="tab" data-tab="daily-reports">گزارش روزانه</div>
-            
+            <div class="tab" data-tab="flour-control">کاهش موجودی آرد</div>
         </div>
         </div>
         <div id="daily-reports" class="tab-content">
@@ -382,9 +371,7 @@
            
             
             <button id="add-flour">ثبت آرد جدید</button>
-            <button id="use-one-bag" class="btn-danger">کاهش 1 کیسه</button>
-            <button id="use-five-bags" class="btn-warning">کاهش 5 کیسه</button>
-        <button id="use-ten-bags" class="btn-danger">کاهش 10 کیسه</button>
+            
             <div class="summary-card">
                 <h3>موجودی فعلی آرد</h3>
                 <div class="summary-item">
@@ -1186,34 +1173,7 @@ function updateFlourUI() {
             
             showAlert('کارگر جدید با موفقیت ثبت شد', 'success');
         });
-        // تابع عمومی برای کاهش موجودی
-function decreaseFlour(amount) {
-    if (currentFlour < amount) {
-        alert(`موجودی کافی نیست! موجودی فعلی: ${currentFlour} کیسه`);
-        return;
-    }
-    
-    flourData.push({
-        id: Date.now(),
-        date: new Date().toISOString().split('T')[0],
-        operation: 'decrement',
-        quantity: amount,
-        price: 0,
-        total: 0,
-        description: `کاهش ${amount} کیسه`
-    });
-    
-    currentFlour -= amount;
-    localStorage.setItem('flourData', JSON.stringify(flourData));
-    updateFlourUI();
-    
-    alert(`${amount} کیسه از موجودی کسر شد`);
-}
-
-// رویدادهای کلیک برای دکمه‌ها
-document.getElementById('use-one-bag').addEventListener('click', () => decreaseFlour(1));
-document.getElementById('use-five-bags').addEventListener('click', () => decreaseFlour(5));
-document.getElementById('use-ten-bags').addEventListener('click', () => decreaseFlour(10));
+        
         function updateWorkersUI() {
             const workersList = document.getElementById('workers-list');
             workersList.innerHTML = '';
@@ -1261,7 +1221,7 @@ const flourControl = {
     
     useOneBag() {
         if (this.stock <= 0) {
-           ;
+            alert('موجودی انبار صفر است!');
             return;
         }
         
@@ -1288,7 +1248,6 @@ const flourControl = {
             logList.appendChild(li);
         });
     },
-    
     
     // برای تنظیم مقدار اولیه (اختیاری)
     setInitialStock(amount) {
@@ -1442,33 +1401,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 tbody.appendChild(row);
             });
         }
-        // اضافه کردن این کد به بخش مدیریت آرد موجود
-document.getElementById('use-one-bag').addEventListener('click', function() {
-    if (currentFlour <= 0) {
-        alert('موجودی آرد کافی نیست!');
-        return;
-    }
-    
-    // ثبت در تاریخچه
-    flourData.push({
-        id: Date.now(),
-        date: new Date().toISOString().split('T')[0],
-        operation: 'decrement',
-        quantity: 1,
-        price: 0,
-        total: 0,
-        description: 'کاهش دستی یک کیسه'
-    });
-    
-    // کاهش موجودی
-    currentFlour -= 1;
-    
-    // ذخیره تغییرات
-    localStorage.setItem('flourData', JSON.stringify(flourData));
-    updateFlourUI();
-    
-    alert('یک کیسه از موجودی کسر شد');
-});
         
         // Reports
         document.getElementById('generate-report').addEventListener('click', generateReport);
