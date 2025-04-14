@@ -1,0 +1,15 @@
+{
+  "name": "اپلیکیشن نانوایی",
+  "short_name": "نانوایی",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffcc00",
+  "icons": [
+    {
+      "src": "1.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

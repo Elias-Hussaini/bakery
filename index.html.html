@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffcc00" />
+    <title>سیستم مدیریت نانوایی</title>
+
+    <!-- بعد از تگ <title> -->
+        <link rel="icon" href="1.jpg">
+        <link rel="apple-touch-icon" href="1.jpg">
+    
+<!-- در بخش <head> -->
+        <link rel="manifest" href="manifest.json">
+        <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoThZERRy1CkWoEGqFVh1MbvqhNGlIUlwcBdeCgx+LVQcXZ10dXAVB8AfE0clJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPOKBqlpFOxMVcflUMvCKIEYQxICJTT2YWM/AcX/fw8fUuyrO8z/05BpWCyQCfSDzHdMMi3iCe2bR0zvvEYVaWFOJz4nGDLkj8yHXZ5TfOJYcFnhk2Mul54jCxWOrhK1hVnyRSSrqullTStCDnE6K6kK8Th1w8q8E9msw0q8mOGo8ROIVpY5SMCAuK0kGKRxKVVkM0iY6qQv6PEPO/4FeTWklPGzgxXKAMEusO2/EB/8tWqVZ8mYwOQpebLt9BodA7DaLX+1hYw/MLAK1F6PexwBwu8C1bXG9j+4A5n6Xvd5bZTB+J+Du2+rgB1t8DFKUDQO+QbzPqshQYDoF7M9q97HXQcEfkrfKd4P6GWSsuz3kD8CYoUvY8B7wcAuNF1P3nKd/d2gDZ9fhJzVKx1Y5+AAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cKEQ4WIBJ5Qk8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAASElEQVQ4y2NgGAWjYBSMglEwCkbBKBgFowA7+A9F/0E0I4oYI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcIwYAAJ4cKzWQJ1kAAAAASUVORK5CYII=">
+    <style>
+
+        :root {
+            --primary-color: #8e44ad;
+            --secondary-color: #9b59b6;
+            --light-color: #f5eef8;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        button.danger {
+    background-color: var(--danger-color);
+    margin-right: 10px;
+}
+
+button.danger:hover {
+    background-color: #c0392b;
+}
+        
+        h1, h2, h3 {
+            margin-bottom: 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-color);
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .summary-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        /* برای جدول‌های گزارش */
+#daily-baking-report, 
+#daily-expenses-report {
+    margin-bottom: 30px;
+}
+
+/* برای کارت خلاصه */
+.daily-summary-item {
+    font-size: 16px;
+    padding: 8px 0;
+}
+        
+        .summary-item.total {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .date-picker {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+/* اضافه کنید به بخش استایل‌های موجود */
+.offline-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f39c12;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+        
+        .date-picker input {
+            width: auto;
+            margin-left: 10px;
+        }
+        
+        .workers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        /* اضافه کردن استایل برای دکمه‌های عملیات */
+#flour-history button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+#flour-history .danger {
+    background-color: var(--danger-color);
+}
+
+#adjust-flour {
+    width: 200px;
+    display: inline-block;
+    margin-left: 10px;
+}
+        
+        .worker-card {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .worker-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>سیستم حسابداری نانوایی</h1>
+            <p>  با همکاری الیاس حسینی و محمود زینعلی </p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="flour">مدیریت آرد</div>
+            <div class="tab" data-tab="workers">کارگران</div>
+            <div class="tab" data-tab="baking">پخت نان</div>
+            <div class="tab" data-tab="expenses">مصارف</div>
+            <div class="tab" data-tab="daily-wages">حقوق روزانه</div>
+            <div class="tab" data-tab="reports">گزارشات</div>
+            <div class="tabs">
+                <!-- تب‌های قبلی -->
+                <div class="tab" data-tab="reports">گزارشات ماهانه</div>
+                <div class="tab" data-tab="daily-reports">گزارش روزانه</div> <!-- تب جدید -->
+            </div>
+        </div>
+        <div id="daily-reports" class="tab-content">
+            <h2>گزارش کامل روزانه</h2>
+            
+            <div class="date-picker">
+                <label>انتخاب تاریخ:</label>
+                <input type="date" id="daily-report-date">
+                <button id="generate-daily-report">نمایش گزارش</button>
+                <button id="reset-daily-report" class="danger">ریست گزارش</button> <!-- دکمه جدید -->
+            </div>
+            
+        
+            <div class="summary-card">
+                <h3>خلاصه روز</h3>
+                <!-- آیتم‌های قبلی -->
+                <div class="summary-item">
+                    <span>آرد مصرفی:</span>
+                    <span id="daily-flour-used">0 کیلوگرم (0 کیسه)</span>
+                </div>
+            </div>
+                <div class="summary-item">
+                    <span>تعداد نان پخت شده:</span>
+                    <span id="daily-bread-count">0</span>
+                </div>
+                <div class="summary-item">
+                    <span>کل فروش:</span>
+                    <span id="daily-total-sales">0 تومان</span>
+                </div>
+                <div class="summary-item">
+                    <span>کل مصارف:</span>
+                    <span id="daily-total-expenses">0 تومان</span>
+                </div>
+            </div>
+        
+            <h3>پخت‌های روز</h3>
+            <table id="daily-baking-report">
+                <thead>
+                    <tr>
+                        <th>کارگر</th>
+                        <th>نوع نان</th>
+                        <th>تعداد</th>
+                        <th>فروش</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        
+            <h3>مصارف روز</h3>
+            <table id="daily-expenses-report">
+                <thead>
+                    <tr>
+                        <th>نوع</th>
+                        <th>توضیحات</th>
+                        <th>مبلغ</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        
+        <div id="flour" class="tab-content active">
+            <h2>مدیریت موجودی آرد</h2>
+            
+            <div class="form-group">
+                <label for="flour-date">تاریخ:</label>
+                <input type="date" id="flour-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="flour-quantity">تعداد کیسه‌های آرد جدید (هر کیسه 40 کیلو):</label>
+                <input type="number" id="flour-quantity" min="0" step="1" placeholder="تعداد کیسه">
+            </div>
+            
+            <div class="form-group">
+                <label for="flour-price">قیمت هر کیسه آرد (تومان):</label>
+                <input type="number" id="flour-price" min="0" placeholder="قیمت هر کیسه">
+            </div>
+            
+            <button id="add-flour">ثبت آرد جدید</button>
+            
+            <div id="flour" class="tab-content active">
+                <!-- فرم موجود -->
+                
+                <div class="summary-card">
+                    <h3>مدیریت موجودی آرد</h3>
+                    <div class="form-group">
+                        <label for="adjust-flour">تغییر موجودی (کیسه):</label>
+                        <input type="number" id="adjust-flour" placeholder="مثلاً 5+ یا 3-">
+                    </div>
+                    <button id="apply-adjustment">اعمال تغییر</button>
+                    
+                    <div class="summary-item">
+                        <span>موجودی فعلی:</span>
+                        <span id="current-flour-display">0 کیسه (0 کیلوگرم)</span>
+                    </div>
+                </div>
+            
+                <h3>تاریخچه ورود آرد <small>(قابل ویرایش)</small></h3>
+                <table id="flour-history">
+                    <thead>
+                        <tr>
+                            <th>تاریخ</th>
+                            <th>تعداد کیسه</th>
+                            <th>قیمت/کیسه</th>
+                            <th>جمع کل</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        
+        <div id="workers" class="tab-content">
+            <h2>مدیریت کارگران</h2>
+            
+            <div class="form-group">
+                <label for="worker-name">نام کارگر:</label>
+                <input type="text" id="worker-name" placeholder="نام کامل کارگر">
+            </div>
+            
+            <div class="form-group">
+                <label for="worker-salary">حقوق روزانه (تومان):</label>
+                <input type="number" id="worker-salary" min="0" placeholder="حقوق روزانه">
+            </div>
+            
+            <button id="add-worker">ثبت کارگر جدید</button>
+            
+            <h3>لیست کارگران</h3>
+            <div class="workers-list" id="workers-list">
+                <!-- Worker cards will be added here -->
+            </div>
+        </div>
+        
+        <div id="baking" class="tab-content">
+            <h2>ثبت پخت روزانه</h2>
+            
+            <div class="form-group">
+                <label for="baking-date">تاریخ:</label>
+                <input type="date" id="baking-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="baking-worker">کارگر:</label>
+                <select id="baking-worker">
+                    <option value="">انتخاب کارگر</option>
+                    <!-- Workers will be added here -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bread-type">نوع نان:</label>
+                <select id="bread-type">
+                    <option value="normal">نان معمولی</option>
+                    <option value="special">نان ویژه</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bread-count">تعداد نان:</label>
+                <input type="number" id="bread-count" min="0" placeholder="تعداد نان پخت شده">
+            </div>
+            
+            <div class="form-group">
+                <label for="bread-price">قیمت هر نان (تومان):</label>
+                <input type="number" id="bread-price" min="0" placeholder="قیمت هر نان">
+            </div>
+            
+            <div class="form-group">
+                <label for="flour-used">آرد مصرفی (کیسه):</label>
+                <input type="number" id="flour-used" min="0" step="0.5" placeholder="مقدار آرد مصرفی">
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="has-dough"> با خمیر آماده
+                </label>
+            </div>
+            
+            <button id="add-baking">ثبت پخت</button>
+            
+            <h3>پخت‌های امروز</h3>
+            <table id="today-baking">
+                <thead>
+                    <tr>
+                        <th>کارگر</th>
+                        <th>نوع نان</th>
+                        <th>تعداد</th>
+                        <th>قیمت واحد</th>
+                        <th>جمع</th>
+                        <th>آرد مصرفی</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Today's baking will be added here -->
+                </tbody>
+            </table>
+        </div>
+        <div id="daily-wages" class="tab-content">
+            <h2>ثبت حقوق روزانه کارگران</h2>
+            
+            <div class="form-group">
+                <label for="wage-date">تاریخ:</label>
+                <input type="date" id="wage-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="wage-worker">کارگر:</label>
+                <select id="wage-worker">
+                    <option value="">انتخاب کارگر</option>
+                    <!-- لیست کارگران اینجا لود میشود -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="wage-amount">مبلغ حقوق (تومان):</label>
+                <input type="number" id="wage-amount" min="0" placeholder="مبلغ حقوق">
+            </div>
+            
+            <div class="form-group">
+                <label for="wage-description">توضیحات (اختیاری):</label>
+                <input type="text" id="wage-description" placeholder="توضیحات اضافه">
+            </div>
+            
+            <button id="add-wage">ثبت حقوق</button>
+            
+            <h3>گزارش حقوق‌های ثبت شده</h3>
+            <div class="date-picker">
+                <label>انتخاب تاریخ:</label>
+                <input type="date" id="wage-report-date">
+                <button id="generate-wage-report">نمایش گزارش</button>
+            </div>
+            
+            <table id="wages-table">
+                <thead>
+                    <tr>
+                        <th>نام کارگر</th>
+                        <th>مبلغ حقوق</th>
+                        <th>توضیحات</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- حقوق‌ها اینجا نمایش داده میشوند -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="expenses" class="tab-content">
+            <h2>ثبت مصارف</h2>
+            
+            <div class="form-group">
+                <label for="expense-date">تاریخ:</label>
+                <input type="date" id="expense-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="expense-type">نوع هزینه:</label>
+                <select id="expense-type">
+                    <option value="rent">اجاره مغازه</option>
+                    <option value="worker">حقوق کارگر</option>
+                    <option value="other">سایر هزینه‌ها</option>
+                </select>
+            </div>
+            <div id="daily-wages" class="tab-content">
+    <h2>ثبت حقوق روزانه کارگران</h2>
+    
+    <div class="form-group">
+        <label for="wage-date">تاریخ:</label>
+        <input type="date" id="wage-date">
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-worker">کارگر:</label>
+        <select id="wage-worker">
+            <option value="">انتخاب کارگر</option>
+            <!-- لیست کارگران اینجا لود میشود -->
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-amount">مبلغ حقوق (تومان):</label>
+        <input type="number" id="wage-amount" min="0" placeholder="مبلغ حقوق">
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-description">توضیحات (اختیاری):</label>
+        <input type="text" id="wage-description" placeholder="توضیحات اضافه">
+    </div>
+    
+    <button id="add-wage">ثبت حقوق</button>
+    
+    <h3>گزارش حقوق‌های ثبت شده</h3>
+    <div class="date-picker">
+        <label>انتخاب تاریخ:</label>
+        <input type="date" id="wage-report-date">
+        <button id="generate-wage-report">نمایش گزارش</button>
+    </div>
+    
+    <table id="wages-table">
+        <thead>
+            <tr>
+                <th>نام کارگر</th>
+                <th>مبلغ حقوق</th>
+                <th>توضیحات</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- حقوق‌ها اینجا نمایش داده میشوند -->
+        </tbody>
+    </table>
+</div>
+            
+            <div class="form-group">
+                <label for="expense-amount">مبلغ (تومان):</label>
+                <input type="number" id="expense-amount" min="0" placeholder="مبلغ هزینه">
+            </div>
+            
+            <div class="form-group">
+                <label for="expense-description">توضیحات:</label>
+                <input type="text" id="expense-description" placeholder="توضیحات هزینه">
+            </div>
+            
+            <button id="add-expense">ثبت هزینه</button>
+            
+            <h3>هزینه‌های ماه جاری</h3>
+            <table id="expenses-table">
+                <thead>
+                    <tr>
+                        <th>تاریخ</th>
+                        <th>نوع هزینه</th>
+                        <th>توضیحات</th>
+                        <th>مبلغ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Expenses will be added here -->
+                </tbody>
+            </table>
+        </div>
+        <div id="daily-wages" class="tab-content">
+    <h2>ثبت حقوق روزانه کارگران</h2>
+    
+    <div class="form-group">
+        <label for="wage-date">تاریخ:</label>
+        <input type="date" id="wage-date">
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-worker">کارگر:</label>
+        <select id="wage-worker">
+            <option value="">انتخاب کارگر</option>
+            <!-- لیست کارگران اینجا لود میشود -->
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-amount">مبلغ حقوق (تومان):</label>
+        <input type="number" id="wage-amount" min="0" placeholder="مبلغ حقوق">
+    </div>
+    
+    <div class="form-group">
+        <label for="wage-description">توضیحات (اختیاری):</label>
+        <input type="text" id="wage-description" placeholder="توضیحات اضافه">
+    </div>
+    
+    <button id="add-wage">ثبت حقوق</button>
+    
+    <h3>گزارش حقوق‌های ثبت شده</h3>
+    <div class="date-picker">
+        <label>انتخاب تاریخ:</label>
+        <input type="date" id="wage-report-date">
+        <button id="generate-wage-report">نمایش گزارش</button>
+    </div>
+    
+    <table id="wages-table">
+        <thead>
+            <tr>
+                <th>نام کارگر</th>
+                <th>مبلغ حقوق</th>
+                <th>توضیحات</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- حقوق‌ها اینجا نمایش داده میشوند -->
+        </tbody>
+    </table>
+</div>
+        
+        <div id="reports" class="tab-content">
+            <h2>گزارشات مالی</h2>
+            
+            <div class="date-picker">
+                <label>انتخاب ماه:</label>
+                <input type="month" id="report-month">
+                <button id="generate-report">نمایش گزارش</button>
+            </div>
+            <div id="daily-wages" class="tab-content">
+                <h2>ثبت حقوق روزانه کارگران</h2>
+                
+                <div class="form-group">
+                    <label for="wage-date">تاریخ:</label>
+                    <input type="date" id="wage-date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="wage-worker">کارگر:</label>
+                    <select id="wage-worker">
+                        <option value="">انتخاب کارگر</option>
+                        <!-- Workers will be added here -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="wage-amount">مبلغ حقوق (تومان):</label>
+                    <input type="number" id="wage-amount" min="0" placeholder="مبلغ حقوق">
+                </div>
+                
+                <div class="form-group">
+                    <label for="wage-description">توضیحات (اختیاری):</label>
+                    <input type="text" id="wage-description" placeholder="توضیحات اضافه">
+                </div>
+                
+                <button id="add-wage">ثبت حقوق</button>
+                
+                <h3>گزارش حقوق‌های ثبت شده</h3>
+                <div class="date-picker">
+                    <label>انتخاب تاریخ:</label>
+                    <input type="date" id="wage-report-date">
+                    <button id="generate-wage-report">نمایش گزارش</button>
+                </div>
+                
+                <table id="wages-table">
+                    <thead>
+                        <tr>
+                            <th>نام کارگر</th>
+                            <th>مبلغ حقوق</th>
+                            <th>توضیحات</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Wages will be added here -->
+                    </tbody>
+                </table>
+                
+                <div class="summary-card" id="daily-summary">
+                    <h3>خلاصه روز</h3>
+                    <div class="summary-item">
+                        <span>تعداد کارگران:</span>
+                        <span id="workers-count">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>مجموع حقوق‌ها:</span>
+                        <span id="total-wages">0 تومان</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <h3>خلاصه ماهانه</h3>
+                <div class="summary-item">
+                    <span>فروش نان:</span>
+                    <span id="report-sales">0 تومان</span>
+                </div>
+                <div class="summary-item">
+                    <span>هزینه آرد:</span>
+                    <span id="report-flour-cost">0 تومان</span>
+                </div>
+                <div class="summary-item">
+                    <span>حقوق کارگران:</span>
+                    <span id="report-workers-cost">0 تومان</span>
+                </div>
+                <div class="summary-item">
+                    <span>سایر هزینه‌ها:</span>
+                    <span id="report-other-expenses">0 تومان</span>
+                </div>
+                <div class="summary-item total">
+                    <span>سود خالص:</span>
+                    <span id="report-net-profit">0 تومان</span>
+                </div>
+            </div>
+            
+            <h3>کارکرد کارگران</h3>
+            <table id="workers-report">
+                <thead>
+                    <tr>
+                        <th>نام کارگر</th>
+                        <th>تعداد روزهای کار</th>
+                        <th>تعداد نان پخت شده</th>
+                        <th>حقوق پرداختی</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Workers report will be added here -->
+                </tbody>
+            </table>
+            
+            <h3>مصرف آرد</h3>
+            <table id="flour-report">
+                <thead>
+                    <tr>
+                        <th>تاریخ</th>
+                        <th>آرد مصرفی (کیلوگرم)</th>
+                        <th>تعداد نان تولیدی</th>
+                        <th>نسبت مصرف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Flour report will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let flourData = JSON.parse(localStorage.getItem('flourData')) || [];
+        let workers = JSON.parse(localStorage.getItem('workers')) || [];
+        let bakingRecords = JSON.parse(localStorage.getItem('bakingRecords')) || [];
+        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        let dailyWages = JSON.parse(localStorage.getItem('dailyWages')) || [];
+        
+        
+        // Current flour in stock (in bags)
+        let currentFlour = flourData.reduce((sum, item) => sum + item.quantity, 0);
+        
+        // DOM elements
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        // Update worker dropdown in wages section
+const wageWorkerSelect = document.getElementById('wage-worker');
+wageWorkerSelect.innerHTML = '<option value="">انتخاب کارگر</option>';
+
+workers.forEach(worker => {
+    const option = document.createElement('option');
+    option.value = worker.id;
+    option.textContent = worker.name;
+    wageWorkerSelect.appendChild(option);
+});
+
+document.getElementById('add-wage').addEventListener('click', () => {
+    const date = document.getElementById('wage-date').value;
+    const workerId = parseInt(document.getElementById('wage-worker').value);
+    const amount = parseInt(document.getElementById('wage-amount').value);
+    const description = document.getElementById('wage-description').value.trim();
+    
+    if (!date || isNaN(workerId) || isNaN(amount)) {
+        alert('لطفاً تاریخ، کارگر و مبلغ حقوق را وارد کنید');
+        return;
+    }
+    
+    const worker = workers.find(w => w.id === workerId);
+    if (!worker) {
+        alert('کارگر انتخاب شده معتبر نیست');
+        return;
+    }
+    
+    dailyWages.push({
+        id: Date.now(),
+        date,
+        workerId,
+        workerName: worker.name,
+        amount,
+        description
+    });
+    
+    localStorage.setItem('dailyWages', JSON.stringify(dailyWages));
+    updateWagesUI();
+    
+    // Also add to expenses
+    expenses.push({
+        date,
+        type: 'worker',
+        typeName: 'حقوق کارگر',
+        amount,
+        description: `${worker.name} - ${description || 'حقوق روزانه'}`
+    });
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    
+    // Clear form
+    document.getElementById('wage-amount').value = '';
+    document.getElementById('wage-description').value = '';
+    document.getElementById('generate-daily-report').addEventListener('click', generateDailyReport);
+    document.getElementById('daily-report-date').value = new Date().toISOString().split('T')[0];
+    
+    showAlert('حقوق کارگر با موفقیت ثبت شد', 'success');
+});   
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Initialize UI
+        document.addEventListener('DOMContentLoaded', () => {
+            updateFlourUI();
+            updateWorkersUI();
+            updateBakingUI();
+            updateExpensesUI();
+            
+            // Set today's date as default in all date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.value = today;
+            });
+            
+            // Set current month as default in reports
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            document.getElementById('report-month').value = currentMonth;
+        });
+        
+        // Flour Management
+        document.getElementById('add-flour').addEventListener('click', () => {
+            const date = document.getElementById('flour-date').value;
+            const quantity = parseInt(document.getElementById('flour-quantity').value);
+            const price = parseInt(document.getElementById('flour-price').value);
+            
+            if (!date || isNaN(quantity) || isNaN(price)) {
+                alert('لطفاً تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            const total = quantity * price;
+            flourData.push({ date, quantity, price, total });
+            currentFlour += quantity;
+            
+            localStorage.setItem('flourData', JSON.stringify(flourData));
+            updateFlourUI();
+            
+            document.getElementById('flour-quantity').value = '';
+            document.getElementById('flour-price').value = '';
+            
+            showAlert('آرد جدید با موفقیت ثبت شد', 'success');
+        });
+        function updateWagesUI() {
+    const selectedDate = document.getElementById('wage-report-date').value || 
+                        document.getElementById('wage-date').value;
+    
+    if (!selectedDate) return;
+    
+    const dailyWagesList = dailyWages.filter(wage => wage.date === selectedDate);
+    const tbody = document.getElementById('wages-table').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    dailyWagesList.forEach(wage => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${wage.workerName}</td>
+            <td>${wage.amount.toLocaleString()}</td>
+            <td>${wage.description || '-'}</td>
+            <td><button onclick="deleteWage(${wage.id})" class="danger">حذف</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    // Update summary
+    document.getElementById('workers-count').textContent = dailyWagesList.length;
+    const total = dailyWagesList.reduce((sum, wage) => sum + wage.amount, 0);
+    document.getElementById('total-wages').textContent = `${total.toLocaleString()} تومان`;
+    document.getElementById('reset-daily-report').addEventListener('click', resetDailyReport);
+}
+document.getElementById('generate-wage-report').addEventListener('click', updateWagesUI);
+function deleteWage(id) {
+    if (confirm('آیا از حذف این ثبت حقوق مطمئن هستید؟')) {
+        dailyWages = dailyWages.filter(wage => wage.id !== id);
+        localStorage.setItem('dailyWages', JSON.stringify(dailyWages));
+        updateWagesUI();
+        showAlert('ثبت حقوق با موفقیت حذف شد', 'success');
+    }
+}
+function resetDailyReport() {
+    if (confirm('آیا مطمئن هستید می‌خواهید تمام داده‌های این روز را پاک کنید؟')) {
+        const date = document.getElementById('daily-report-date').value;
+        
+        // حذف پخت‌های این روز
+        bakingRecords = bakingRecords.filter(record => record.date !== date);
+        
+        // حذف مصارف این روز
+        expenses = expenses.filter(expense => expense.date !== date);
+        
+        // حذف حقوق‌های این روز
+        dailyWages = dailyWages.filter(wage => wage.date !== date);
+        
+        // ذخیره تغییرات
+        localStorage.setItem('bakingRecords', JSON.stringify(bakingRecords));
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        localStorage.setItem('dailyWages', JSON.stringify(dailyWages));
+        document.getElementById('apply-adjustment').addEventListener('click', adjustFlourStock);
+        // ریست نمایش
+        document.getElementById('daily-bread-count').textContent = '0';
+        document.getElementById('daily-total-sales').textContent = '0 تومان';
+        document.getElementById('daily-total-expenses').textContent = '0 تومان';
+        document.getElementById('daily-flour-used').textContent = '0 کیلوگرم (0 کیسه)';
+        document.getElementById('daily-baking-report').querySelector('tbody').innerHTML = '';
+        document.getElementById('daily-expenses-report').querySelector('tbody').innerHTML = '';
+        document.getElementById('add-flour').addEventListener('click', () => {
+    // ... کدهای قبلی
+    
+    flourData.push({
+        id: Date.now(), // اضافه کردن ID منحصر به فرد
+        date,
+        quantity,
+        price,
+        total
+    });
+    
+    // ... بقیه کدها
+});
+        
+        showAlert('داده‌های روز با موفقیت ریست شدند', 'success');
+    }
+}
+function generateDailyReport() {
+    // ... کدهای قبلی
+    
+    // محاسبه آرد مصرفی
+    const dailyFlourUsed = dailyBaking.reduce((sum, record) => sum + record.flourUsed, 0);
+    const flourBagsUsed = (dailyFlourUsed / 40).toFixed(2); // هر کیسه 40 کیلوگرم
+
+    // نمایش در خلاصه
+    document.getElementById('daily-flour-used').textContent = 
+        $`{dailyFlourUsed} کیلوگرم (${flourBagsUsed} کیسه)`;
+
+    // ... بقیه کدها
+}
+// تابع اعمال تغییر دستی موجودی
+function adjustFlourStock() {
+    const adjustment = parseInt(document.getElementById('adjust-flour').value);
+    if (isNaN(adjustment)) return;
+
+    currentFlour += adjustment;
+    updateFlourUI();
+    showAlert`(موجودی آرد با موفقیت ${adjustment > 0 ? 'افزایش' : 'کاهش'} یافت, 'success')`;
+    document.getElementById('adjust-flour').value = '';
+}
+
+// تابع حذف ورودی آرد
+function deleteFlourEntry(id) {
+    if (confirm('آیا از حذف این ورودی مطمئن هستید؟')) {
+        const entry = flourData.find(item => item.id === id);
+        currentFlour -= entry.quantity;
+        flourData = flourData.filter(item => item.id !== id);
+        
+        localStorage.setItem('flourData', JSON.stringify(flourData));
+        updateFlourUI();
+        showAlert('ورودی آرد حذف شد', 'success');
+    }
+}
+
+// تابع ویرایش ورودی آرد
+function editFlourEntry(id) {
+    const entry = flourData.find(item => item.id === id);
+    const newQty = prompt('تعداد کیسه جدید:', entry.quantity);
+    const newPrice = prompt('قیمت جدید هر کیسه:', entry.price);
+
+    if (newQty && newPrice) {
+        currentFlour -= entry.quantity; // حذف مقدار قدیم
+        currentFlour += parseInt(newQty); // اضافه کردن مقدار جدید
+        
+        entry.quantity = parseInt(newQty);
+        entry.price = parseInt(newPrice);
+        entry.total = entry.quantity * entry.price;
+        
+        localStorage.setItem('flourData', JSON.stringify(flourData));
+        updateFlourUI();
+        showAlert('ورودی آرد ویرایش شد', 'success');
+    }
+}
+function generateDailyReport() {
+    const date = document.getElementById('daily-report-date').value;
+    if (!date) return;
+
+    // پخت‌های روز
+    const dailyBaking = bakingRecords.filter(record => record.date === date);
+    const dailyBreadCount = dailyBaking.reduce((sum, record) => sum + record.breadCount, 0);
+    const dailySales = dailyBaking.reduce((sum, record) => sum + record.total, 0);
+
+    // مصارف روز
+    const dailyExpenses = expenses.filter(expense => expense.date === date);
+    const dailyExpensesTotal = dailyExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+
+    // نمایش خلاصه
+    document.getElementById('daily-bread-count').textContent = dailyBreadCount;
+    document.getElementById('daily-total-sales').textContent =`${dailySales.toLocaleString()} تومان`;
+    document.getElementById('daily-total-expenses').textContent = `${dailyExpensesTotal.toLocaleString()} تومان`;
+
+    // نمایش پخت‌ها
+    const bakingTbody = document.getElementById('daily-baking-report').querySelector('tbody');
+    bakingTbody.innerHTML = '';
+    dailyBaking.forEach(record => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${record.workerName}</td>
+            <td>${record.breadType === 'normal' ? 'معمولی' : 'ویژه'}</td>
+            <td>${record.breadCount}</td>
+            <td>${record.total.toLocaleString()}</td>
+        `;
+        bakingTbody.appendChild(row);
+    });
+
+    // نمایش مصارف
+    const expensesTbody = document.getElementById('daily-expenses-report').querySelector('tbody');
+    expensesTbody.innerHTML = '';
+    dailyExpenses.forEach(expense => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${expense.typeName}</td>
+            <td>${expense.description || '-'}</td>
+            <td>${expense.amount.toLocaleString()}</td>
+        `;
+        expensesTbody.appendChild(row);
+    });
+}
+        function updateFlourUI() {
+            document.getElementById('current-flour').textContent = currentFlour;
+            document.getElementById('current-flour-kg').textContent = currentFlour * 50;
+            
+            const tbody = document.getElementById('flour-history').querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            flourData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(item.date)}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.price.toLocaleString()}</td>
+                    <td>${item.total.toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Workers Management
+        document.getElementById('add-worker').addEventListener('click', () => {
+            const name = document.getElementById('worker-name').value.trim();
+            const salary = parseInt(document.getElementById('worker-salary').value);
+            
+            if (!name || isNaN(salary)) {
+                alert('لطفاً تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            workers.push({ id: Date.now(), name, salary });
+            localStorage.setItem('workers', JSON.stringify(workers));
+            updateWorkersUI();
+            
+            document.getElementById('worker-name').value = '';
+            document.getElementById('worker-salary').value = '';
+            
+            showAlert('کارگر جدید با موفقیت ثبت شد', 'success');
+        });
+        function updateFlourUI() {
+    document.getElementById('current-flour-display').textContent = 
+        `${currentFlour} کیسه (${currentFlour * 40} کیلوگرم)`;
+    
+    const tbody = document.getElementById('flour-history').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    flourData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${formatDate(item.date)}</td>
+            <td>${item.quantity}</td>
+            <td>${item.price.toLocaleString()}</td>
+            <td>${item.total.toLocaleString()}</td>
+            <td>
+                <button onclick="editFlourEntry(${item.id})">ویرایش</button>
+                <button onclick="deleteFlourEntry(${item.id})" class="danger">حذف</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+        function updateWorkersUI() {
+            const workersList = document.getElementById('workers-list');
+            workersList.innerHTML = '';
+            
+            workers.forEach(worker => {
+                const card = document.createElement('div');
+                card.className = 'worker-card';
+                card.innerHTML = `
+                    <h3>${worker.name}</h3>
+                    <p>حقوق روزانه: ${worker.salary.toLocaleString()} تومان</p>
+                    <button onclick="deleteWorker(${worker.id})" class="danger">حذف</button>
+                `;
+                workersList.appendChild(card);
+            });
+            
+            // Update worker dropdown in baking section
+            const bakingWorkerSelect = document.getElementById('baking-worker');
+            bakingWorkerSelect.innerHTML = '<option value="">انتخاب کارگر</option>';
+            
+            workers.forEach(worker => {
+                const option = document.createElement('option');
+                option.value = worker.id;
+                option.textContent = worker.name;
+                bakingWorkerSelect.appendChild(option);
+            });
+        }
+        
+        function deleteWorker(id) {
+            if (confirm('آیا از حذف این کارگر مطمئن هستید؟')) {
+                workers = workers.filter(worker => worker.id !== id);
+                localStorage.setItem('workers', JSON.stringify(workers));
+                updateWorkersUI();
+                showAlert('کارگر با موفقیت حذف شد', 'success');
+            }
+        }
+        
+        // Baking Management
+        document.getElementById('add-baking').addEventListener('click', () => {
+            const date = document.getElementById('baking-date').value;
+            const workerId = parseInt(document.getElementById('baking-worker').value);
+            const breadType = document.getElementById('bread-type').value;
+            const breadCount = parseInt(document.getElementById('bread-count').value);
+            const breadPrice = parseInt(document.getElementById('bread-price').value);
+            const flourUsed = parseFloat(document.getElementById('flour-used').value);
+            const hasDough = document.getElementById('has-dough').checked;
+            
+            if (!date || isNaN(workerId) || isNaN(breadCount) || isNaN(breadPrice) || isNaN(flourUsed)) {
+                alert('لطفاً تمام فیلدهای ضروری را پر کنید');
+                return;
+            }
+            
+            if (flourUsed > currentFlour * 50) {
+                alert('موجودی آرد کافی نیست');
+                return;
+            }
+            
+            const worker = workers.find(w => w.id === workerId);
+            if (!worker) {
+                alert('کارگر انتخاب شده معتبر نیست');
+                return;
+            }
+            
+            const total = breadCount * breadPrice;
+            
+            bakingRecords.push({
+                date,
+                workerId,
+                workerName: worker.name,
+                breadType,
+                breadCount,
+                breadPrice,
+                total,
+                flourUsed,
+                hasDough
+            });
+            
+            // Update flour stock
+            currentFlour -= flourUsed / 50;
+            
+            localStorage.setItem('bakingRecords', JSON.stringify(bakingRecords));
+            updateBakingUI();
+            updateFlourUI();
+            
+            // Clear form
+            document.getElementById('bread-count').value = '';
+            document.getElementById('bread-price').value = '';
+            document.getElementById('flour-used').value = '';
+            document.getElementById('has-dough').checked = false;
+            
+            showAlert('پخت نان با موفقیت ثبت شد', 'success');
+        });
+        
+        function updateBakingUI() {
+            const today = document.getElementById('baking-date').value;
+            const tbody = document.getElementById('today-baking').querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            const todayRecords = bakingRecords.filter(record => record.date === today);
+            
+            todayRecords.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.workerName}</td>
+                    <td>${record.breadType === 'normal' ? 'معمولی' : 'ویژه'}</td>
+                    <td>${record.breadCount}</td>
+                    <td>${record.breadPrice.toLocaleString()}</td>
+                    <td>${record.total.toLocaleString()}</td>
+                    <td>${record.flourUsed} کیلو</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Expenses Management
+        document.getElementById('add-expense').addEventListener('click', () => {
+            const date = document.getElementById('expense-date').value;
+            const type = document.getElementById('expense-type').value;
+            const amount = parseInt(document.getElementById('expense-amount').value);
+            const description = document.getElementById('expense-description').value.trim();
+            
+            if (!date || isNaN(amount)) {
+                alert('لطفاً تمام فیلدهای ضروری را پر کنید');
+                return;
+            }
+            
+            let typeName = '';
+            switch (type) {
+                case 'rent':
+                    typeName = 'اجاره مغازه';
+                    break;
+                case 'worker':
+                    typeName = 'حقوق کارگر';
+                    break;
+                default:
+                    typeName = 'سایر هزینه‌ها';
+            }
+            
+            expenses.push({
+                date,
+                type,
+                typeName,
+                amount,
+                description
+            });
+            
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            updateExpensesUI();
+            
+            // Clear form
+            document.getElementById('expense-amount').value = '';
+            document.getElementById('expense-description').value = '';
+            
+            showAlert('هزینه با موفقیت ثبت شد', 'success');
+        });
+        
+        function updateExpensesUI() {
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            const tbody = document.getElementById('expenses-table').querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            const monthExpenses = expenses.filter(expense => expense.date.startsWith(currentMonth));
+            
+            monthExpenses.forEach(expense => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(expense.date)}</td>
+                    <td>${expense.typeName}</td>
+                    <td>${expense.description || '-'}</td>
+                    <td>${expense.amount.toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Reports
+        document.getElementById('generate-report').addEventListener('click', generateReport);
+        
+        function generateReport() {
+            const month = document.getElementById('report-month').value;
+            if (!month) return;
+            
+            // Filter data for selected month
+            const monthBaking = bakingRecords.filter(record => record.date.startsWith(month));
+            const monthExpenses = expenses.filter(expense => expense.date.startsWith(month));
+            
+            // Calculate sales
+            const totalSales = monthBaking.reduce((sum, record) => sum + record.total, 0);
+            
+            // Calculate flour cost
+            const flourPurchases = flourData.filter(item => item.date.startsWith(month));
+            const flourCost = flourPurchases.reduce((sum, item) => sum + item.total, 0);
+            
+            // Calculate worker salaries
+            const workerExpenses = monthExpenses.filter(expense => expense.type === 'worker');
+            const otherExpenses = monthExpenses.filter(expense => expense.type !== 'worker');
+            
+            const workerCost = workerExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const otherCost = otherExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+            
+            // Calculate net profit
+            const netProfit = totalSales - flourCost - workerCost - otherCost;
+            
+            // Update summary
+            document.getElementById('report-sales').textContent = `${totalSales.toLocaleString()} تومان`;
+            document.getElementById('report-flour-cost').textContent = `${flourCost.toLocaleString()} تومان`;
+            document.getElementById('report-workers-cost').textContent =` ${workerCost.toLocaleString()} تومان`;
+            document.getElementById('report-other-expenses').textContent = `${otherCost.toLocaleString()} تومان`;
+            document.getElementById('report-net-profit').textContent = `${netProfit.toLocaleString()} تومان`;
+            
+            // Workers report
+            const workersReportTbody = document.getElementById('workers-report').querySelector('tbody');
+            workersReportTbody.innerHTML = '';
+            
+            workers.forEach(worker => {
+                const workerBaking = monthBaking.filter(record => record.workerId === worker.id);
+                const workDays = [...new Set(workerBaking.map(record => record.date))].length;
+                const totalBread = workerBaking.reduce((sum, record) => sum + record.breadCount, 0);
+                const salary = workDays * worker.salary;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${worker.name}</td>
+                    <td>${workDays}</td>
+                    <td>${totalBread}</td>
+                    <td>${salary.toLocaleString()}</td>
+                `;
+                workersReportTbody.appendChild(row);
+            });
+            
+            // Flour report
+            const flourReportTbody = document.getElementById('flour-report').querySelector('tbody');
+            flourReportTbody.innerHTML = '';
+            
+            const flourUsage = {};
+            monthBaking.forEach(record => {
+                if (!flourUsage[record.date]) {
+                    flourUsage[record.date] = {
+                        flourUsed: 0,
+                        breadCount: 0
+                    };
+                }
+                flourUsage[record.date].flourUsed += record.flourUsed;
+                flourUsage[record.date].breadCount += record.breadCount;
+            });
+            
+            Object.entries(flourUsage).forEach(([date, usage]) => {
+                const ratio = (usage.flourUsed / usage.breadCount).toFixed(2);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(date)}</td>
+                    <td>${usage.flourUsed}</td>
+                    <td>${usage.breadCount}</td>
+                    <td>${ratio} کیلوگرم به ازای هر نان</td>
+                `;
+                flourReportTbody.appendChild(row);
+            });
+        }
+        
+        // Helper functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fa-IR');
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(alert, container.firstChild);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+    </script>
+   <script>
+    // ذخیره داده‌ها در IndexedDB
+    const initDB = () => {
+        return new Promise((resolve) => {
+            const request = indexedDB.open('BakeryDB', 1);
+            
+            request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('flourData')) {
+                    db.createObjectStore('flourData', { keyPath: 'id' });
+                }
+                // برای سایر جداول هم تکرار کنید...
+            };
+            
+            request.onsuccess = () => resolve(request.result);
+        });
+    };
+    
+    // Service Worker پیشرفته
+    if ('serviceWorker' in navigator) {
+        const swScript = `
+            const CACHE_NAME = 'bakery-v3';
+            const DATA_CACHE = 'bakery-data-v1';
+            
+            self.addEventListener('install', (e) => {
+                e.waitUntil(
+                    caches.open(CACHE_NAME).then(cache => 
+                        cache.addAll(['/', '/index.html'])
+                );
+            });
+            
+            self.addEventListener('fetch', (e) => {
+                if (e.request.url.includes('/api')) {
+                    e.respondWith(
+                        fetch(e.request).then(res => {
+                            const clone = res.clone();
+                            caches.open(DATA_CACHE).then(cache => 
+                                cache.put(e.request, clone)
+                            );
+                            return res;
+                        }).catch(() => caches.match(e.request))
+                    );
+                } else {
+                    e.respondWith(
+                        caches.match(e.request).then(res => res || fetch(e.request))
+                    );
+                }
+            });
+        `;
+        
+        const blob = new Blob([swScript], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+        
+        navigator.serviceWorker.register(swUrl)
+            .then(() => console.log('SW Registered'))
+            .catch(err => console.error('SW Error:', err));
+    }
+    
+    // ذخیره خودکار داده‌ها
+    function autoSave() {
+        const saveData = () => {
+            localStorage.setItem('bakeryData', JSON.stringify({
+                flourData,
+                workers,
+                bakingRecords,
+                expenses,
+                dailyWages
+            }));
+            
+            if ('indexedDB' in window) {
+                initDB().then(db => {
+                    const tx = db.transaction('flourData', 'readwrite');
+                    flourData.forEach(item => tx.objectStore('flourData').put(item));
+                });
+            }
+        };
+        
+        // ذخیره هر 30 ثانیه
+        setInterval(saveData, 30000);
+        window.addEventListener('beforeunload', saveData);
+    }
+    
+    // راه‌اندازی هنگام لود صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+        autoSave();
+        
+        // بازیابی داده‌ها
+        if ('indexedDB' in window) {
+            initDB().then(db => {
+                const tx = db.transaction('flourData', 'readonly');
+                tx.objectStore('flourData').getAll().onsuccess = (e) => {
+                    if (e.target.result.length > 0) {
+                        flourData = e.target.result;
+                        updateFlourUI();
+                    }
+                };
+            });
+        }
+    });
+    </script>
+    <div class="offline-banner" id="offlineBanner">
+        حالت آفلاین - داده‌ها به صورت محلی ذخیره شدند
+    </div>
+    
+    <script>
+    // تشخیص وضعیت آفلاین
+    window.addEventListener('online', () => {
+        document.getElementById('offlineBanner').style.display = 'none';
+    });
+    window.addEventListener('offline', () => {
+        document.getElementById('offlineBanner').style.display = 'block';
+    });
+    </script>
+    <script>
+        // Service Worker به صورت inline
+        const swContent = `
+          const CACHE_NAME = 'bakery-offline-v1';
+          const APP_SHELL = [
+            '/',
+            '/index.html',
+            '/styles.css',
+            '/app.js',
+            'https://cdn.jsdelivr.net/npm/persian-date@1.0.0/dist/persian-date.min.js'
+          ];
+        
+          self.addEventListener('install', (e) => {
+            e.waitUntil(
+              caches.open(CACHE_NAME)
+                .then(cache => cache.addAll(APP_SHELL))
+            );
+          });
+        
+          self.addEventListener('fetch', (e) => {
+            e.respondWith(
+              caches.match(e.request)
+                .then(res => res || fetch(e.request))
+            );
+          });
+        `;
+        
+        // ثبت Service Worker
+        if ('serviceWorker' in navigator) {
+          const blob = new Blob([swContent], {type: 'application/javascript'});
+          const swUrl = URL.createObjectURL(blob);
+          
+          navigator.serviceWorker.register(swUrl)
+            .then(reg => console.log('ServiceWorker ثبت شد'))
+            .catch(err => console.error('خطا:', err));
+        }
+        
+        // دکمه نصب دستی
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          const installBtn = document.createElement('button');
+          installBtn.innerHTML = '📲 نصب اپلیکیشن';
+          installBtn.style = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            z-index: 9999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          `;
+          
+          installBtn.onclick = () => {
+            e.prompt();
+            e.userChoice.then(choice => {
+              if (choice.outcome === 'accepted') {
+                installBtn.style.display = 'none';
+              }
+            });
+          };
+          
+          document.body.appendChild(installBtn);
+        });
+        </script>
+</body>
+</html>
