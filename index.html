@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffcc00" />
     <title>سیستم مدیریت نانوایی</title>
+    <link rel="icon" href="1.jpg">
+    <link rel="apple-touch-icon" href="1.jpg">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoThZERRy1CkWoEGqFVh1MbvqhNGlIUlwcBdeCgx+LVQcXZ10dXAVB8AfE0clJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPOKBqlpFOxMVcflUMvCKIEYQxICJTT2YWM/AcX/fw8fUuyrO8z/05BpWCyQCfSDzHdMMi3iCe2bR0zvvEYVaWFOJz4nGDLkj8yHXZ5TfOJYcFnhk2Mul54jCxWOrhK1hVnyRSSrqullTStCDnE6K6kK8Th1w8q8E9msw0q8mOGo8ROIVpY5SMCAuK0kGKRxKVVkM0iY6qQv6PEPO/4FeTWklPGzgxXKAMEusO2/EB/8tWqVZ8mYwOQpebLt9BodA7DaLX+1hYw/MLAK1F6PexwBwu8C1bXG9j+4A5n6Xvd5bZTB+J+Du2+rgB1t8DFKUDQO+QbzPqshQYDoF7M9q97HXQcEfkrfKd4P6GWSsuz3kD8CYoUvY8B7wcAuNF1P3nKd/d2gDZ9fhJzVKx1Y5+AAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cKEQ4WIBJ5Qk8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAASElEQVQ4y2NgGAWjYBSMglEwCkbBKBgFowA7+A9F/0E0I4oYI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcIwYAAJ4cKzWQJ1kAAAAASUVORK5CYII=">
 
-    <!-- بعد از تگ <title> -->
-        <link rel="icon" href="1.jpg">
-        <link rel="apple-touch-icon" href="1.jpg">
-    
-<!-- در بخش <head> -->
-        <link rel="manifest" href="manifest.json">
-        <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoThZERRy1CkWoEGqFVh1MbvqhNGlIUlwcBdeCgx+LVQcXZ10dXAVB8AfE0clJ0UVK/F9SaBHjwXE/3t173L0DhGaVqWbPOKBqlpFOxMVcflUMvCKIEYQxICJTT2YWM/AcX/fw8fUuyrO8z/05BpWCyQCfSDzHdMMi3iCe2bR0zvvEYVaWFOJz4nGDLkj8yHXZ5TfOJYcFnhk2Mul54jCxWOrhK1hVnyRSSrqullTStCDnE6K6kK8Th1w8q8E9msw0q8mOGo8ROIVpY5SMCAuK0kGKRxKVVkM0iY6qQv6PEPO/4FeTWklPGzgxXKAMEusO2/EB/8tWqVZ8mYwOQpebLt9BodA7DaLX+1hYw/MLAK1F6PexwBwu8C1bXG9j+4A5n6Xvd5bZTB+J+Du2+rgB1t8DFKUDQO+QbzPqshQYDoF7M9q97HXQcEfkrfKd4P6GWSsuz3kD8CYoUvY8B7wcAuNF1P3nKd/d2gDZ9fhJzVKx1Y5+AAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+cKEQ4WIBJ5Qk8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAASElEQVQ4y2NgGAWjYBSMglEwCkbBKBgFowA7+A9F/0E0I4oYI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcI4YcIwYAAJ4cKzWQJ1kAAAAASUVORK5CYII=">
     <style>
-
         :root {
             --primary-color: #8e44ad;
             --secondary-color: #9b59b6;
@@ -52,14 +48,6 @@
             border-radius: 8px 8px 0 0;
             margin-bottom: 20px;
         }
-        button.danger {
-    background-color: var(--danger-color);
-    margin-right: 10px;
-}
-
-button.danger:hover {
-    background-color: #c0392b;
-}
         
         h1, h2, h3 {
             margin-bottom: 15px;
@@ -166,7 +154,17 @@ button.danger:hover {
             padding-bottom: 10px;
             border-bottom: 1px dashed #ddd;
         }
-        
+        .btn-warning {
+    background-color: #f39c12;
+    color: white;
+}
+
+.flour-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
         .summary-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
@@ -212,21 +210,6 @@ button.danger:hover {
             margin-bottom: 20px;
         }
         
-/* اضافه کنید به بخش استایل‌های موجود */
-.offline-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #f39c12;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    display: none;
-    z-index: 1000;
-}
-
-        
         .date-picker input {
             width: auto;
             margin-left: 10px;
@@ -238,23 +221,58 @@ button.danger:hover {
             gap: 10px;
             margin-bottom: 20px;
         }
-        /* اضافه کردن استایل برای دکمه‌های عملیات */
-#flour-history button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    font-size: 14px;
+        /* استایل بخش مدیریت آرد */
+.flour-simple-summary {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
 }
 
-#flour-history .danger {
-    background-color: var(--danger-color);
+.flour-stock {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
 }
 
-#adjust-flour {
+.flour-stock span:first-child {
+    color: #8e44ad;
+}
+
+.flour-use-btn {
+    display: block;
     width: 200px;
-    display: inline-block;
-    margin-left: 10px;
+    margin: 0 auto;
+    padding: 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-        
+
+.flour-use-btn:hover {
+    background-color: #c0392b;
+}
+
+.flour-history {
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+#flour-usage-log {
+    list-style-type: none;
+    padding: 0;
+}
+
+#flour-usage-log li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+}
         .worker-card {
             background-color: var(--light-color);
             padding: 15px;
@@ -277,22 +295,19 @@ button.danger:hover {
 <body>
     <div class="container">
         <header>
-            <h1>سیستم حسابداری نانوایی</h1>
-            <p>  با همکاری الیاس حسینی و محمود زینعلی </p>
+            <h1>سیستم مدیریت نانوایی</h1>
+            <p>مدیریت آرد، کارگران، پخت نان و حساب‌ها</p>
         </header>
-        
         <div class="tabs">
             <div class="tab active" data-tab="flour">مدیریت آرد</div>
             <div class="tab" data-tab="workers">کارگران</div>
             <div class="tab" data-tab="baking">پخت نان</div>
             <div class="tab" data-tab="expenses">مصارف</div>
             <div class="tab" data-tab="daily-wages">حقوق روزانه</div>
-            <div class="tab" data-tab="reports">گزارشات</div>
-            <div class="tabs">
-                <!-- تب‌های قبلی -->
-                <div class="tab" data-tab="reports">گزارشات ماهانه</div>
-                <div class="tab" data-tab="daily-reports">گزارش روزانه</div> <!-- تب جدید -->
-            </div>
+            <div class="tab" data-tab="reports">گزارشات ماهانه</div>
+            <div class="tab" data-tab="daily-reports">گزارش روزانه</div>
+            
+        </div>
         </div>
         <div id="daily-reports" class="tab-content">
             <h2>گزارش کامل روزانه</h2>
@@ -301,18 +316,10 @@ button.danger:hover {
                 <label>انتخاب تاریخ:</label>
                 <input type="date" id="daily-report-date">
                 <button id="generate-daily-report">نمایش گزارش</button>
-                <button id="reset-daily-report" class="danger">ریست گزارش</button> <!-- دکمه جدید -->
             </div>
-            
         
             <div class="summary-card">
                 <h3>خلاصه روز</h3>
-                <!-- آیتم‌های قبلی -->
-                <div class="summary-item">
-                    <span>آرد مصرفی:</span>
-                    <span id="daily-flour-used">0 کیلوگرم (0 کیسه)</span>
-                </div>
-            </div>
                 <div class="summary-item">
                     <span>تعداد نان پخت شده:</span>
                     <span id="daily-bread-count">0</span>
@@ -326,19 +333,21 @@ button.danger:hover {
                     <span id="daily-total-expenses">0 تومان</span>
                 </div>
             </div>
+            
         
             <h3>پخت‌های روز</h3>
             <table id="daily-baking-report">
-                <thead>
-                    <tr>
-                        <th>کارگر</th>
-                        <th>نوع نان</th>
-                        <th>تعداد</th>
-                        <th>فروش</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+    <thead>
+        <tr>
+            <th>کارگر</th>
+            <th>نوع نان</th>
+            <th>تعداد نان</th>
+            <th>تعداد کیسه آرد</th>
+            <th>فروش</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
         
             <h3>مصارف روز</h3>
             <table id="daily-expenses-report">
@@ -370,40 +379,39 @@ button.danger:hover {
                 <label for="flour-price">قیمت هر کیسه آرد (تومان):</label>
                 <input type="number" id="flour-price" min="0" placeholder="قیمت هر کیسه">
             </div>
+           
             
             <button id="add-flour">ثبت آرد جدید</button>
-            
-            <div id="flour" class="tab-content active">
-                <!-- فرم موجود -->
-                
-                <div class="summary-card">
-                    <h3>مدیریت موجودی آرد</h3>
-                    <div class="form-group">
-                        <label for="adjust-flour">تغییر موجودی (کیسه):</label>
-                        <input type="number" id="adjust-flour" placeholder="مثلاً 5+ یا 3-">
-                    </div>
-                    <button id="apply-adjustment">اعمال تغییر</button>
-                    
-                    <div class="summary-item">
-                        <span>موجودی فعلی:</span>
-                        <span id="current-flour-display">0 کیسه (0 کیلوگرم)</span>
-                    </div>
+            <button id="use-one-bag" class="btn-danger">کاهش 1 کیسه</button>
+            <button id="use-five-bags" class="btn-warning">کاهش 5 کیسه</button>
+        <button id="use-ten-bags" class="btn-danger">کاهش 10 کیسه</button>
+            <div class="summary-card">
+                <h3>موجودی فعلی آرد</h3>
+                <div class="summary-item">
+                    <span>تعداد کیسه‌ها:</span>
+                    <span id="current-flour">0</span>
                 </div>
-            
-                <h3>تاریخچه ورود آرد <small>(قابل ویرایش)</small></h3>
-                <table id="flour-history">
-                    <thead>
-                        <tr>
-                            <th>تاریخ</th>
-                            <th>تعداد کیسه</th>
-                            <th>قیمت/کیسه</th>
-                            <th>جمع کل</th>
-                            <th>عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="summary-item">
+                    <span>کیلوگرم:</span>
+                    <span id="current-flour-kg">0</span>
+                </div>
             </div>
+            
+            <h3>تاریخچه ورود آرد</h3>
+            <table id="flour-history">
+                <thead>
+                    <tr>
+                        <th>تاریخ</th>
+                        <th>تعداد کیسه</th>
+                        <th>قیمت هر کیسه</th>
+                        <th>جمع کل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Flour history will be added here -->
+                </tbody>
+            </table>
+        </div>
         
         <div id="workers" class="tab-content">
             <h2>مدیریت کارگران</h2>
@@ -461,8 +469,8 @@ button.danger:hover {
             </div>
             
             <div class="form-group">
-                <label for="flour-used">آرد مصرفی (کیسه):</label>
-                <input type="number" id="flour-used" min="0" step="0.5" placeholder="مقدار آرد مصرفی">
+                <label for="flour-used">تعداد کیسه آرد مصرفی:</label>
+                <input type="number" id="flour-used" min="0" step="0.01" placeholder="تعداد کیسه مصرفی">
             </div>
             
             <div class="form-group">
@@ -913,6 +921,113 @@ document.getElementById('add-wage').addEventListener('click', () => {
         
         // Flour Management
         document.getElementById('add-flour').addEventListener('click', () => {
+    // ... کدهای قبلی بدون تغییر
+    
+    // تبدیل کیسه به کیلوگرم برای نمایش
+    document.getElementById('current-flour').textContent = currentFlour;
+    document.getElementById('current-flour-kg').textContent = currentFlour * 40; // 40 کیلوگرم در هر کیسه
+});
+document.getElementById('add-baking').addEventListener('click', () => {
+    // ... کدهای قبلی
+    
+    // تبدیل کیلوگرم به کیسه برای بررسی موجودی
+    if ((flourUsed / 40) > currentFlour) {
+        alert(`موجودی آرد کافی نیست. موجودی: ${currentFlour} کیسه (${currentFlour*40} کیلوگرم)`);
+        return;
+    }
+    document.getElementById('add-baking').addEventListener('click', function() {
+    // ... سایر دریافت مقادیر
+    
+    const flourUsedBags = parseFloat(document.getElementById('flour-used').value); // دریافت تعداد کیسه
+    
+    // ... بقیه اعتبارسنجی‌ها
+    
+    bakingRecords.push({
+        // ... سایر فیلدها
+        flourUsedBags: flourUsedBags, // ذخیره تعداد کیسه
+        flourUsed: flourUsedBags // اگر نیاز به سازگاری با کد قدیم دارید
+    });
+    
+    // ... بقیه کدها
+});
+function generateDailyReport() {
+    // ... کدهای قبلی
+    
+    // نمایش در جدول پخت‌ها
+    const bakingTbody = document.getElementById('daily-baking-report').querySelector('tbody');
+    bakingTbody.innerHTML = '';
+    
+    dailyBaking.forEach(record => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${record.workerName}</td>
+            <td>${record.breadType === 'normal' ? 'معمولی' : 'ویژه'}</td>
+            <td>${record.breadCount.toLocaleString()}</td>
+            <td>${record.flourUsedBags.toFixed(2)}</td>
+            <td>${record.total.toLocaleString()} تومان</td>
+        `;
+        bakingTbody.appendChild(row);
+    });
+    
+    // ... بقیه کدها
+}
+    
+    // ... بقیه کدها
+    
+    // به روزرسانی موجودی آرد (بر اساس کیسه)
+    currentFlour -= flourUsed / 40;
+    
+    // ... بقیه کدها
+});
+function generateDailyReport() {
+    // ... کدهای قبلی
+    
+    const dailyFlourUsedBags = (dailyFlourUsedKg / 40).toFixed(2); // تبدیل کیلوگرم به کیسه
+    
+    // نمایش در خلاصه گزارش
+ // نمایش خلاصه آرد مصرفی
+document.getElementById('daily-flour-used').textContent = 
+    `${(dailyFlourUsedKg / 40).toFixed(2)} کیسه (${dailyFlourUsedKg} کیلوگرم)`;
+    
+    // نمایش در جدول پخت‌ها
+    dailyBaking.forEach(record => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${record.workerName}</td>
+        <td>${record.breadType === 'normal' ? 'معمولی' : 'ویژه'}</td>
+        <td>${record.breadCount.toLocaleString()}</td>
+        <td>${(record.flourUsed / 40).toFixed(2)} کیسه</td>
+        <td>${record.total.toLocaleString()} تومان</td>
+    `;
+    bakingTbody.appendChild(row);
+});
+    
+    // ... بقیه کدها
+}
+function generateReport() {
+    // ... کدهای قبلی
+    
+    // گزارش مصرف آرد (تبدیل به کیسه)
+    Object.entries(flourUsage).forEach(([date, usage]) => {
+        const flourBags = (usage.flourUsed / 40).toFixed(2);
+        const ratio = (usage.flourUsed / usage.breadCount).toFixed(2);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${formatDate(date)}</td>
+            <td>${flourBags} کیسه (${usage.flourUsed} کیلوگرم)</td>
+            <td>${usage.breadCount.toLocaleString()}</td>
+            <td>${ratio} کیلوگرم به ازای هر نان</td>
+        `;
+        flourReportTbody.appendChild(row);
+    });
+}
+
+function updateFlourUI() {
+    document.getElementById('current-flour').textContent = currentFlour;
+    document.getElementById('current-flour-kg').textContent = currentFlour * 40; // تبدیل به کیلوگرم برای نمایش
+    // ... بقیه کد بدون تغییر
+}
+        document.getElementById('add-flour').addEventListener('click', () => {
             const date = document.getElementById('flour-date').value;
             const quantity = parseInt(document.getElementById('flour-quantity').value);
             const price = parseInt(document.getElementById('flour-price').value);
@@ -959,7 +1074,6 @@ document.getElementById('add-wage').addEventListener('click', () => {
     document.getElementById('workers-count').textContent = dailyWagesList.length;
     const total = dailyWagesList.reduce((sum, wage) => sum + wage.amount, 0);
     document.getElementById('total-wages').textContent = `${total.toLocaleString()} تومان`;
-    document.getElementById('reset-daily-report').addEventListener('click', resetDailyReport);
 }
 document.getElementById('generate-wage-report').addEventListener('click', updateWagesUI);
 function deleteWage(id) {
@@ -970,120 +1084,22 @@ function deleteWage(id) {
         showAlert('ثبت حقوق با موفقیت حذف شد', 'success');
     }
 }
-function resetDailyReport() {
-    if (confirm('آیا مطمئن هستید می‌خواهید تمام داده‌های این روز را پاک کنید؟')) {
-        const date = document.getElementById('daily-report-date').value;
-        
-        // حذف پخت‌های این روز
-        bakingRecords = bakingRecords.filter(record => record.date !== date);
-        
-        // حذف مصارف این روز
-        expenses = expenses.filter(expense => expense.date !== date);
-        
-        // حذف حقوق‌های این روز
-        dailyWages = dailyWages.filter(wage => wage.date !== date);
-        
-        // ذخیره تغییرات
-        localStorage.setItem('bakingRecords', JSON.stringify(bakingRecords));
-        localStorage.setItem('expenses', JSON.stringify(expenses));
-        localStorage.setItem('dailyWages', JSON.stringify(dailyWages));
-        document.getElementById('apply-adjustment').addEventListener('click', adjustFlourStock);
-        // ریست نمایش
-        document.getElementById('daily-bread-count').textContent = '0';
-        document.getElementById('daily-total-sales').textContent = '0 تومان';
-        document.getElementById('daily-total-expenses').textContent = '0 تومان';
-        document.getElementById('daily-flour-used').textContent = '0 کیلوگرم (0 کیسه)';
-        document.getElementById('daily-baking-report').querySelector('tbody').innerHTML = '';
-        document.getElementById('daily-expenses-report').querySelector('tbody').innerHTML = '';
-        document.getElementById('add-flour').addEventListener('click', () => {
-    // ... کدهای قبلی
-    
-    flourData.push({
-        id: Date.now(), // اضافه کردن ID منحصر به فرد
-        date,
-        quantity,
-        price,
-        total
-    });
-    
-    // ... بقیه کدها
-});
-        
-        showAlert('داده‌های روز با موفقیت ریست شدند', 'success');
-    }
-}
-function generateDailyReport() {
-    // ... کدهای قبلی
-    
-    // محاسبه آرد مصرفی
-    const dailyFlourUsed = dailyBaking.reduce((sum, record) => sum + record.flourUsed, 0);
-    const flourBagsUsed = (dailyFlourUsed / 40).toFixed(2); // هر کیسه 40 کیلوگرم
-
-    // نمایش در خلاصه
-    document.getElementById('daily-flour-used').textContent = 
-        $`{dailyFlourUsed} کیلوگرم (${flourBagsUsed} کیسه)`;
-
-    // ... بقیه کدها
-}
-// تابع اعمال تغییر دستی موجودی
-function adjustFlourStock() {
-    const adjustment = parseInt(document.getElementById('adjust-flour').value);
-    if (isNaN(adjustment)) return;
-
-    currentFlour += adjustment;
-    updateFlourUI();
-    showAlert`(موجودی آرد با موفقیت ${adjustment > 0 ? 'افزایش' : 'کاهش'} یافت, 'success')`;
-    document.getElementById('adjust-flour').value = '';
-}
-
-// تابع حذف ورودی آرد
-function deleteFlourEntry(id) {
-    if (confirm('آیا از حذف این ورودی مطمئن هستید؟')) {
-        const entry = flourData.find(item => item.id === id);
-        currentFlour -= entry.quantity;
-        flourData = flourData.filter(item => item.id !== id);
-        
-        localStorage.setItem('flourData', JSON.stringify(flourData));
-        updateFlourUI();
-        showAlert('ورودی آرد حذف شد', 'success');
-    }
-}
-
-// تابع ویرایش ورودی آرد
-function editFlourEntry(id) {
-    const entry = flourData.find(item => item.id === id);
-    const newQty = prompt('تعداد کیسه جدید:', entry.quantity);
-    const newPrice = prompt('قیمت جدید هر کیسه:', entry.price);
-
-    if (newQty && newPrice) {
-        currentFlour -= entry.quantity; // حذف مقدار قدیم
-        currentFlour += parseInt(newQty); // اضافه کردن مقدار جدید
-        
-        entry.quantity = parseInt(newQty);
-        entry.price = parseInt(newPrice);
-        entry.total = entry.quantity * entry.price;
-        
-        localStorage.setItem('flourData', JSON.stringify(flourData));
-        updateFlourUI();
-        showAlert('ورودی آرد ویرایش شد', 'success');
-    }
-}
 function generateDailyReport() {
     const date = document.getElementById('daily-report-date').value;
     if (!date) return;
 
-    // پخت‌های روز
     const dailyBaking = bakingRecords.filter(record => record.date === date);
     const dailyBreadCount = dailyBaking.reduce((sum, record) => sum + record.breadCount, 0);
     const dailySales = dailyBaking.reduce((sum, record) => sum + record.total, 0);
+    const dailyFlourUsed = dailyBaking.reduce((sum, record) => sum + record.flourUsed, 0);
+    const flourBagsUsed = (dailyFlourUsed / 40).toFixed(2); // تبدیل کیلوگرم به کیسه (هر کیسه 40 کیلوگرم)
 
-    // مصارف روز
     const dailyExpenses = expenses.filter(expense => expense.date === date);
     const dailyExpensesTotal = dailyExpenses.reduce((sum, expense) => sum + expense.amount, 0);
 
     // نمایش خلاصه
     document.getElementById('daily-bread-count').textContent = dailyBreadCount;
-    document.getElementById('daily-total-sales').textContent =`${dailySales.toLocaleString()} تومان`;
+    document.getElementById('daily-total-sales').textContent = `${dailySales.toLocaleString()} تومان`;
     document.getElementById('daily-total-expenses').textContent = `${dailyExpensesTotal.toLocaleString()} تومان`;
 
     // نمایش پخت‌ها
@@ -1095,6 +1111,7 @@ function generateDailyReport() {
             <td>${record.workerName}</td>
             <td>${record.breadType === 'normal' ? 'معمولی' : 'ویژه'}</td>
             <td>${record.breadCount}</td>
+            <td>${(record.flourUsed / 40).toFixed(2)}</td> <!-- نمایش به صورت کیسه -->
             <td>${record.total.toLocaleString()}</td>
         `;
         bakingTbody.appendChild(row);
@@ -1113,8 +1130,25 @@ function generateDailyReport() {
         expensesTbody.appendChild(row);
     });
 }
-        function updateFlourUI() {
-            document.getElementById('current-flour').textContent = currentFlour;
+function updateFlourUI() {
+    document.getElementById('current-flour').textContent = currentFlour;
+    document.getElementById('current-flour-kg').textContent = currentFlour * 40; // تغییر از 50 به 40 کیلوگرم
+    
+    const tbody = document.getElementById('flour-history').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    flourData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${formatDate(item.date)}</td>
+            <td>${item.quantity}</td>
+            <td>${item.price.toLocaleString()}</td>
+            <td>${item.total.toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+            document.getElementById('current-flour').textContent = currentFlour;{
             document.getElementById('current-flour-kg').textContent = currentFlour * 50;
             
             const tbody = document.getElementById('flour-history').querySelector('tbody');
@@ -1130,8 +1164,9 @@ function generateDailyReport() {
                 `;
                 tbody.appendChild(row);
             });
-        }
         
+            }
+    
         // Workers Management
         document.getElementById('add-worker').addEventListener('click', () => {
             const name = document.getElementById('worker-name').value.trim();
@@ -1151,28 +1186,34 @@ function generateDailyReport() {
             
             showAlert('کارگر جدید با موفقیت ثبت شد', 'success');
         });
-        function updateFlourUI() {
-    document.getElementById('current-flour-display').textContent = 
-        `${currentFlour} کیسه (${currentFlour * 40} کیلوگرم)`;
+        // تابع عمومی برای کاهش موجودی
+function decreaseFlour(amount) {
+    if (currentFlour < amount) {
+        alert(`موجودی کافی نیست! موجودی فعلی: ${currentFlour} کیسه`);
+        return;
+    }
     
-    const tbody = document.getElementById('flour-history').querySelector('tbody');
-    tbody.innerHTML = '';
-    
-    flourData.forEach(item => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${formatDate(item.date)}</td>
-            <td>${item.quantity}</td>
-            <td>${item.price.toLocaleString()}</td>
-            <td>${item.total.toLocaleString()}</td>
-            <td>
-                <button onclick="editFlourEntry(${item.id})">ویرایش</button>
-                <button onclick="deleteFlourEntry(${item.id})" class="danger">حذف</button>
-            </td>
-        `;
-        tbody.appendChild(row);
+    flourData.push({
+        id: Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        operation: 'decrement',
+        quantity: amount,
+        price: 0,
+        total: 0,
+        description: `کاهش ${amount} کیسه`
     });
+    
+    currentFlour -= amount;
+    localStorage.setItem('flourData', JSON.stringify(flourData));
+    updateFlourUI();
+    
+    alert(`${amount} کیسه از موجودی کسر شد`);
 }
+
+// رویدادهای کلیک برای دکمه‌ها
+document.getElementById('use-one-bag').addEventListener('click', () => decreaseFlour(1));
+document.getElementById('use-five-bags').addEventListener('click', () => decreaseFlour(5));
+document.getElementById('use-ten-bags').addEventListener('click', () => decreaseFlour(10));
         function updateWorkersUI() {
             const workersList = document.getElementById('workers-list');
             workersList.innerHTML = '';
@@ -1208,7 +1249,62 @@ function generateDailyReport() {
                 showAlert('کارگر با موفقیت حذف شد', 'success');
             }
         }
+        // سیستم ساده مدیریت آرد
+const flourControl = {
+    stock: localStorage.getItem('flourStock') ? parseInt(localStorage.getItem('flourStock')) : 0,
+    history: JSON.parse(localStorage.getItem('flourUsageHistory')) || [],
+    
+    init() {
+        document.getElementById('use-one-bag').addEventListener('click', () => this.useOneBag());
+        this.updateDisplay();
+    },
+    
+    useOneBag() {
+        if (this.stock <= 0) {
+           ;
+            return;
+        }
         
+        this.stock--;
+        const usageTime = new Date().toLocaleString('fa-IR');
+        this.history.unshift(`۱ کیسه در ${usageTime} مصرف شد`);
+        
+        // ذخیره در localStorage
+        localStorage.setItem('flourStock', this.stock);
+        localStorage.setItem('flourUsageHistory', JSON.stringify(this.history));
+        
+        this.updateDisplay();
+    },
+    
+    updateDisplay() {
+        document.getElementById('current-flour-stock').textContent = this.stock;
+        
+        const logList = document.getElementById('flour-usage-log');
+        logList.innerHTML = '';
+        
+        this.history.slice(0, 10).forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            logList.appendChild(li);
+        });
+    },
+    
+    
+    // برای تنظیم مقدار اولیه (اختیاری)
+    setInitialStock(amount) {
+        this.stock = amount;
+        localStorage.setItem('flourStock', amount);
+        this.updateDisplay();
+    }
+};
+
+// راه‌اندازی سیستم هنگام لود صفحه
+document.addEventListener('DOMContentLoaded', () => {
+    flourControl.init();
+    
+    // برای تنظیم موجودی اولیه (مثال: 50 کیسه)
+    // flourControl.setInitialStock(50);
+});
         // Baking Management
         document.getElementById('add-baking').addEventListener('click', () => {
             const date = document.getElementById('baking-date').value;
@@ -1346,6 +1442,33 @@ function generateDailyReport() {
                 tbody.appendChild(row);
             });
         }
+        // اضافه کردن این کد به بخش مدیریت آرد موجود
+document.getElementById('use-one-bag').addEventListener('click', function() {
+    if (currentFlour <= 0) {
+        alert('موجودی آرد کافی نیست!');
+        return;
+    }
+    
+    // ثبت در تاریخچه
+    flourData.push({
+        id: Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        operation: 'decrement',
+        quantity: 1,
+        price: 0,
+        total: 0,
+        description: 'کاهش دستی یک کیسه'
+    });
+    
+    // کاهش موجودی
+    currentFlour -= 1;
+    
+    // ذخیره تغییرات
+    localStorage.setItem('flourData', JSON.stringify(flourData));
+    updateFlourUI();
+    
+    alert('یک کیسه از موجودی کسر شد');
+});
         
         // Reports
         document.getElementById('generate-report').addEventListener('click', generateReport);
@@ -1450,187 +1573,5 @@ function generateDailyReport() {
             }, 3000);
         }
     </script>
-   <script>
-    // ذخیره داده‌ها در IndexedDB
-    const initDB = () => {
-        return new Promise((resolve) => {
-            const request = indexedDB.open('BakeryDB', 1);
-            
-            request.onupgradeneeded = (e) => {
-                const db = e.target.result;
-                if (!db.objectStoreNames.contains('flourData')) {
-                    db.createObjectStore('flourData', { keyPath: 'id' });
-                }
-                // برای سایر جداول هم تکرار کنید...
-            };
-            
-            request.onsuccess = () => resolve(request.result);
-        });
-    };
-    
-    // Service Worker پیشرفته
-    if ('serviceWorker' in navigator) {
-        const swScript = `
-            const CACHE_NAME = 'bakery-v3';
-            const DATA_CACHE = 'bakery-data-v1';
-            
-            self.addEventListener('install', (e) => {
-                e.waitUntil(
-                    caches.open(CACHE_NAME).then(cache => 
-                        cache.addAll(['/', '/index.html'])
-                );
-            });
-            
-            self.addEventListener('fetch', (e) => {
-                if (e.request.url.includes('/api')) {
-                    e.respondWith(
-                        fetch(e.request).then(res => {
-                            const clone = res.clone();
-                            caches.open(DATA_CACHE).then(cache => 
-                                cache.put(e.request, clone)
-                            );
-                            return res;
-                        }).catch(() => caches.match(e.request))
-                    );
-                } else {
-                    e.respondWith(
-                        caches.match(e.request).then(res => res || fetch(e.request))
-                    );
-                }
-            });
-        `;
-        
-        const blob = new Blob([swScript], { type: 'application/javascript' });
-        const swUrl = URL.createObjectURL(blob);
-        
-        navigator.serviceWorker.register(swUrl)
-            .then(() => console.log('SW Registered'))
-            .catch(err => console.error('SW Error:', err));
-    }
-    
-    // ذخیره خودکار داده‌ها
-    function autoSave() {
-        const saveData = () => {
-            localStorage.setItem('bakeryData', JSON.stringify({
-                flourData,
-                workers,
-                bakingRecords,
-                expenses,
-                dailyWages
-            }));
-            
-            if ('indexedDB' in window) {
-                initDB().then(db => {
-                    const tx = db.transaction('flourData', 'readwrite');
-                    flourData.forEach(item => tx.objectStore('flourData').put(item));
-                });
-            }
-        };
-        
-        // ذخیره هر 30 ثانیه
-        setInterval(saveData, 30000);
-        window.addEventListener('beforeunload', saveData);
-    }
-    
-    // راه‌اندازی هنگام لود صفحه
-    document.addEventListener('DOMContentLoaded', () => {
-        autoSave();
-        
-        // بازیابی داده‌ها
-        if ('indexedDB' in window) {
-            initDB().then(db => {
-                const tx = db.transaction('flourData', 'readonly');
-                tx.objectStore('flourData').getAll().onsuccess = (e) => {
-                    if (e.target.result.length > 0) {
-                        flourData = e.target.result;
-                        updateFlourUI();
-                    }
-                };
-            });
-        }
-    });
-    </script>
-    <div class="offline-banner" id="offlineBanner">
-        حالت آفلاین - داده‌ها به صورت محلی ذخیره شدند
-    </div>
-    
-    <script>
-    // تشخیص وضعیت آفلاین
-    window.addEventListener('online', () => {
-        document.getElementById('offlineBanner').style.display = 'none';
-    });
-    window.addEventListener('offline', () => {
-        document.getElementById('offlineBanner').style.display = 'block';
-    });
-    </script>
-    <script>
-        // Service Worker به صورت inline
-        const swContent = `
-          const CACHE_NAME = 'bakery-offline-v1';
-          const APP_SHELL = [
-            '/',
-            '/index.html',
-            '/styles.css',
-            '/app.js',
-            'https://cdn.jsdelivr.net/npm/persian-date@1.0.0/dist/persian-date.min.js'
-          ];
-        
-          self.addEventListener('install', (e) => {
-            e.waitUntil(
-              caches.open(CACHE_NAME)
-                .then(cache => cache.addAll(APP_SHELL))
-            );
-          });
-        
-          self.addEventListener('fetch', (e) => {
-            e.respondWith(
-              caches.match(e.request)
-                .then(res => res || fetch(e.request))
-            );
-          });
-        `;
-        
-        // ثبت Service Worker
-        if ('serviceWorker' in navigator) {
-          const blob = new Blob([swContent], {type: 'application/javascript'});
-          const swUrl = URL.createObjectURL(blob);
-          
-          navigator.serviceWorker.register(swUrl)
-            .then(reg => console.log('ServiceWorker ثبت شد'))
-            .catch(err => console.error('خطا:', err));
-        }
-        
-        // دکمه نصب دستی
-        window.addEventListener('beforeinstallprompt', (e) => {
-          e.preventDefault();
-          const installBtn = document.createElement('button');
-          installBtn.innerHTML = '📲 نصب اپلیکیشن';
-          installBtn.style = `
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 24px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            z-index: 9999;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          `;
-          
-          installBtn.onclick = () => {
-            e.prompt();
-            e.userChoice.then(choice => {
-              if (choice.outcome === 'accepted') {
-                installBtn.style.display = 'none';
-              }
-            });
-          };
-          
-          document.body.appendChild(installBtn);
-        });
-        </script>
 </body>
 </html>
