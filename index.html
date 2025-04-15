@@ -51,6 +51,35 @@
         h1, h2, h3 {
             margin-bottom: 15px;
         }
+        .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.photo-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.photo-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.photo-card .photo-title {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.photo-card .photo-date {
+    font-size: 12px;
+    color: #666;
+}
         
         .tabs {
             display: flex;
@@ -285,8 +314,45 @@
     <div class="container">
         <header>
             <h1>سیستم مدیریت نانوایی</h1>
-            <p>مدیریت آرد، کارگران، پخت نان و حساب‌ها</p>
+            <p>ساخته شده توسط الیاس ،اختصاصی برای آقا محمود</p>
         </header>
+        <div class="tabs">
+            <!-- تب‌های موجود -->
+            <div class="tab" data-tab="photos">مدیریت عکس‌ها</div>
+        </div>
+        
+        <!-- محتوای تب جدید -->
+        <div id="photos" class="tab-content">
+            <h2>مدیریت عکس‌ها</h2>
+            
+            <div class="form-group">
+                <label for="photo-date">تاریخ:</label>
+                <input type="date" id="photo-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="photo-title">عنوان:</label>
+                <input type="text" id="photo-title" placeholder="عنوان عکس">
+            </div>
+            
+            <div class="form-group">
+                <label for="photo-upload">آپلود عکس:</label>
+                <input type="file" id="photo-upload" accept="image/*">
+            </div>
+            
+            <button id="add-photo">ذخیره عکس</button>
+            
+            <h3>عکس‌های ذخیره شده</h3>
+            <div class="date-picker">
+                <label>انتخاب تاریخ:</label>
+                <input type="date" id="photo-filter-date">
+                <button id="filter-photos">فیلتر</button>
+            </div>
+            
+            <div id="photos-gallery" class="photos-grid">
+                <!-- عکس‌ها اینجا نمایش داده می‌شوند -->
+            </div>
+        </div>
         <div class="tabs">
             <div class="tab active" data-tab="flour">مدیریت آرد</div>
             <div class="tab" data-tab="workers">کارگران</div>
@@ -296,6 +362,7 @@
             <div class="tab" data-tab="reports">گزارشات ماهانه</div>
             <div class="tab" data-tab="daily-reports">گزارش روزانه</div>
             <div class="tab" data-tab="weekly-wages">گزارش حقوق هفتگی</div>
+         
         </div>
         </div>
         <div id="daily-reports" class="tab-content">
@@ -884,7 +951,91 @@
         wageWorkerSelect.appendChild(option);
     });
     
+    // متغیرهای جدید
+let photos = JSON.parse(localStorage.getItem('photos')) || [];
+
+// رویدادهای جدید
+document.getElementById('add-photo').addEventListener('click', savePhoto);
+document.getElementById('filter-photos').addEventListener('click', filterPhotos);
+
+// تابع ذخیره عکس
+function savePhoto() {
+    const date = document.getElementById('photo-date').value;
+    const title = document.getElementById('photo-title').value.trim();
+    const fileInput = document.getElementById('photo-upload');
+    const file = fileInput.files[0];
     
+    if (!date || !title || !file) {
+        alert('لطفاً تمام فیلدها را پر کنید و عکس را انتخاب نمایید');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const photo = {
+            id: Date.now(),
+            date,
+            title,
+            image: e.target.result,
+            timestamp: new Date().toISOString()
+        };
+        
+        photos.push(photo);
+        localStorage.setItem('photos', JSON.stringify(photos));
+        showAlert('عکس با موفقیت ذخیره شد', 'success');
+        displayPhotos(photos);
+        
+        // پاک کردن فرم
+        document.getElementById('photo-title').value = '';
+        fileInput.value = '';
+    };
+    reader.readAsDataURL(file);
+}
+
+// تابع نمایش عکس‌ها
+function displayPhotos(photosToDisplay) {
+    const gallery = document.getElementById('photos-gallery');
+    gallery.innerHTML = '';
+    
+    photosToDisplay.forEach(photo => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.innerHTML = `
+            <img src="${photo.image}" alt="${photo.title}">
+            <div class="photo-title">${photo.title}</div>
+            <div class="photo-date">${formatDate(photo.date)}</div>
+            <button onclick="deletePhoto(${photo.id})" class="danger">حذف</button>
+        `;
+        gallery.appendChild(card);
+    });
+}
+
+// تابع فیلتر عکس‌ها بر اساس تاریخ
+function filterPhotos() {
+    const date = document.getElementById('photo-filter-date').value;
+    if (!date) {
+        displayPhotos(photos);
+        return;
+    }
+    
+    const filteredPhotos = photos.filter(photo => photo.date === date);
+    displayPhotos(filteredPhotos);
+}
+
+// تابع حذف عکس
+function deletePhoto(id) {
+    if (confirm('آیا از حذف این عکس مطمئن هستید؟')) {
+        photos = photos.filter(photo => photo.id !== id);
+        localStorage.setItem('photos', JSON.stringify(photos));
+        displayPhotos(photos);
+        showAlert('عکس با موفقیت حذف شد', 'success');
+    }
+}
+
+// در تابع initialize UI
+document.getElementById('photo-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('photo-filter-date').value = new Date().toISOString().split('T')[0];
+displayPhotos(photos);
     // Tab switching
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -1069,44 +1220,51 @@
     
     // Baking Management
     document.getElementById('add-baking').addEventListener('click', () => {
-        const date = document.getElementById('baking-date').value;
-        const workerId = parseInt(document.getElementById('baking-worker').value);
-        const breadType = document.getElementById('bread-type').value;
-        const breadCount = parseInt(document.getElementById('bread-count').value);
-        const breadPrice = parseInt(document.getElementById('bread-price').value);
-        const flourUsedBags = parseFloat(document.getElementById('flour-used').value);
-        const hasDough = document.getElementById('has-dough').checked;
-        
-        if (!date || isNaN(workerId) || isNaN(breadCount) || isNaN(breadPrice) || isNaN(flourUsedBags)) {
-            alert('لطفاً تمام فیلدهای ضروری را پر کنید');
-            return;
-        }
-        
-        if (flourUsedBags > currentFlour) {
-            alert(`موجودی آرد کافی نیست. موجودی: ${currentFlour.toFixed(1)} کیسه (${(currentFlour * 40).toFixed(1)} کیلوگرم)`);
-            return;
-        }
-        
+    const date = document.getElementById('baking-date').value;
+    const workerId = parseInt(document.getElementById('baking-worker').value); // ممکن است NaN باشد اگر انتخاب نشده باشد
+    const breadType = document.getElementById('bread-type').value;
+    const breadCount = parseInt(document.getElementById('bread-count').value);
+    const breadPrice = parseInt(document.getElementById('bread-price').value);
+    const flourUsedBags = parseFloat(document.getElementById('flour-used').value);
+    const hasDough = document.getElementById('has-dough').checked;
+    
+    // تغییر شرط بررسی کارگر
+    if (!date || isNaN(breadCount) || isNaN(breadPrice) || isNaN(flourUsedBags)) {
+        alert('لطفاً تمام فیلدهای ضروری را پر کنید');
+        return;
+    }
+    
+    if (flourUsedBags > currentFlour) {
+        alert(`موجودی آرد کافی نیست. موجودی: ${currentFlour.toFixed(1)} کیسه (${(currentFlour * 40).toFixed(1)} کیلوگرم)`);
+        return;
+    }
+    
+    // این بخش را تغییر دهید - کارگر اختیاری است
+    let workerName = 'نامشخص';
+    if (!isNaN(workerId)) {
         const worker = workers.find(w => w.id === workerId);
-        if (!worker) {
-            alert('کارگر انتخاب شده معتبر نیست');
-            return;
+        if (worker) {
+            workerName = worker.name;
         }
-        
-        const total = breadCount * breadPrice;
-        
-        bakingRecords.push({
-            date,
-            workerId,
-            workerName: worker.name,
-            breadType,
-            breadCount,
-            breadPrice,
-            total,
-            flourUsedBags,
-            flourUsed: flourUsedBags * 40, // برای سازگاری با گزارشات قدیمی
-            hasDough
-        });
+    }
+    
+    const total = breadCount * breadPrice;
+    
+    bakingRecords.push({
+        date,
+        workerId: isNaN(workerId) ? null : workerId,
+        workerName,
+        breadType,
+        breadCount,
+        breadPrice,
+        total,
+        flourUsedBags,
+        flourUsed: flourUsedBags * 40,
+        hasDough
+    });
+    
+    // بقیه کدها بدون تغییر...
+
         
         // Update flour stock
         currentFlour -= flourUsedBags;
